@@ -1,26 +1,68 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import Products from "./components/Products";
+import { data } from "./data";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [filter, setFilter] = useState("all");
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    setProducts(data);
+  }, []);
+
+  useEffect(() => {
+    setProducts([]);
+
+    const filtered = data.map((product) => ({
+      ...product,
+      filtered: product.category.includes(filter),
+    }));
+    setProducts(filtered);
+  }, [filter]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+    <>
+      <nav>
+        <a href='#!' onClick={() => setFilter("all")}>
+          All
         </a>
-      </header>
-    </div>
+
+        <a href='#!' onClick={() => setFilter("cellphone")}>
+          Cellphone
+        </a>
+
+        <a href='#!' onClick={() => setFilter("android")}>
+          Android
+        </a>
+
+        <a href='#!' onClick={() => setFilter("ios")}>
+          Ios
+        </a>
+
+        <a href='#!' onClick={() => setFilter("desktop")}>
+          Desktop
+        </a>
+
+        <a href='#!' onClick={() => setFilter("laptop")}>
+          Laptop
+        </a>
+
+        <a href='#!' onClick={() => setFilter("pc")}>
+          PC
+        </a>
+
+        <a href='#!' onClick={() => setFilter("perfume")}>
+          Perfume
+        </a>
+        <a href='#!' onClick={() => setFilter("watch")}>
+          Watch
+        </a>
+      </nav>
+
+      <Products products={products} />
+    </>
   );
-}
+};
 
 export default App;
