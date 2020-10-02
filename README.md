@@ -8,8 +8,6 @@ yarn ou npm install
 
 ## para rodar
 
-## IOS:
-
 yarn/npm start
 
 <img align="center" src="./screenshot/screenshot.gif"></img>
